@@ -1,0 +1,88 @@
+{% load static %}
+
+<div class="col-xl-4 col-lg-6 col-md-6">
+     <div class="post-card post-card--default">
+         <div class="post-card__image">
+             <a href="{% url 'blog_detail' x.slug %}" >
+                 <img src="{{x.image.url}}" alt="">
+             </a>
+         </div>
+         
+         <div class="post-card__content">
+             <h5 class="post-card__title">
+                 <a href="{% url 'blog_detail' x.slug %}" class="post-card__title-link">{{x.title}}</a>
+             </h5>
+             <div class="post-card__exerpt">{{x.description | safe}}
+             </div>
+             
+             <ul class="post-card__meta list-inline">
+                 <!-- <li class="post-card__meta-item">
+                     <a href="author.html" class="post-card__meta-link"> 
+                         <img src="{% static 'assets/img/author/1.jpg' %}" alt="" class="post-card__meta-img">
+                     </a>
+                 </li> -->
+                 <li class="post-card__meta-item ">
+                     <a href="#" class="post-card__meta-link">{{x.author}}</a> 
+                 </li>
+                 <li class="post-card__meta-item"> 
+                     <span class="dot"></span> {{x.created_at}}
+                 </li>
+             </ul>
+         </div>
+     </div>
+ </div>
+
+
+
+
+ <script>
+document.querySelectorAll('.post-card__exerpt').forEach(element => {
+    console.log("Hello");
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = element.innerHTML;
+
+    let wordCount = 0;
+    const maxWords = 15;
+    const openTags = [];
+
+    function trimNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const words = node.textContent.trim().split(/\s+/);
+            if (wordCount + words.length <= maxWords) {
+                wordCount += words.length;
+            } else {
+                const remainingWords = maxWords - wordCount;
+                node.textContent = words.slice(0, remainingWords).join(' ') + '...';
+                wordCount = maxWords;
+            }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            openTags.push(node.nodeName.toLowerCase());
+
+            const children = Array.from(node.childNodes);
+            for (let i = 0; i < children.length; i++) {
+                if (wordCount < maxWords) {
+                    trimNode(children[i]);
+                } else {
+                    // Remove extra nodes
+                    node.removeChild(children[i]);
+                }
+            }
+        }
+    }
+
+    trimNode(tempDiv);
+
+    // Close any open tags manually
+    let finalHTML = tempDiv.innerHTML;
+    while (openTags.length) {
+        const tag = openTags.pop();
+        finalHTML += `</${tag}>`;
+    }
+
+    element.innerHTML = finalHTML;
+});
+
+ </script>
+
+ 
