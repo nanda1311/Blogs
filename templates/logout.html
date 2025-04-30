@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- favicon -->
+    <link rel="icon" sizes="16x16" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- Title -->
+    <title>Logged Out - NoonPost</title>
+
+    <!--Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/custom.css' %}">
+</head>
+
+<body>
+
+    <!--loading -->
+    <div class="loading">
+        <div class="loading__circle"></div>
+    </div>
+
+    <!-- Header -->
+    {% include 'partials/header.html' %}
+
+    <main class="main">
+        <!--Logout message-->
+        <section class="m-top mb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 m-auto">
+                        <div class="widget text-center">
+                            <h5 class="widget__title">You have been logged out</h5>
+                            <p class="widget__form-text">Thank you for visiting NoonPost. Hope to see you again soon!</p>
+                            <div class="widget__form-btn mt-4">
+                                <a href="{% url 'login' %}" class="btn-custom">Login Again</a>
+                                <a href="{% url 'home' %}" class="btn-custom btn-custom--outline ms-2">Go to Homepage</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% include 'partials/newsletter.html' %}
+    </main>
+
+    {% include 'partials/footer.html' %}
+
+    <!--Plugins-->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/masonry.min.js' %}"></script>
+    <script src="{% static 'assets/js/theia-sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'assets/js/ajax-contact.js' %}"></script>
+    <script src="{% static 'assets/js/switch.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

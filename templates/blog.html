@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home page</title>
+{% endblock title %}
+    
+
+
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+
+
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+ 
+ <body>
+     
+    <!--loading -->
+    <div class="loading">
+        <div class="loading__circle"></div>
+    </div>
+
+    <main class="main">
+        <!--post-default-->
+        <section class="mt-130 mb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12 side-content">
+                        <div class="theiaStickySidebar">
+                            <!--Post-single-->
+                            <div class="post-single">
+                                <div class="post-single__image">
+                                    <img src="{{blog.image.url}}" alt="" class="post-single__image-img">
+                                </div>
+
+                                <div class="post-single__content">
+                                    <h2 class="post-single__title">{{blog.title}}</h2>
+                                    <ul class="post-single__meta list-inline">
+
+                                        <li class="post-single__meta-item ">
+                                            <a href="#" class="post-single__meta-link">{{blog.author}}</a>
+                                        </li>
+                                        <li class="post-single__meta-item "> <span class="dot"></span>{{blog.created_at}}</li>
+                                    </ul>
+                                </div>
+                        
+                                <div class="post-single__body">
+                                    
+                                    {{blog.description | safe}}
+                                </div>
+
+                               
+                            </div>
+
+
+                           
+            
+    </main>
+    {% endblock content %}
+
+   

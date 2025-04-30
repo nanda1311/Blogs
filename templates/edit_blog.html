@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Edit Blog | Blogs</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="create-blog-form">
+        <h1>Edit Blog Post</h1>
+        <form method="post" enctype="multipart/form-data" action="#">
+            {% csrf_token %}
+            
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title</label>
+                {{ form.title }}
+            </div>
+
+            <!-- Author -->
+            <div class="form-group">
+                <label for="author">Author</label>
+                {{ form.author }}
+            </div>
+
+            <!-- Author Designation -->
+            <div class="form-group">
+                <label for="author_designation">Author Designation</label>
+                {{ form.author_designation }}
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                {{ form.description }}
+            </div>
+
+            <!-- Existing Image -->
+            {% if blog.image %}
+            <div class="form-group mb-3">
+                <label>Current Image:</label><br>
+                <img src="{{ blog.image.url }}" alt="Current Image" class="img-fluid rounded" width="300">
+            </div>
+            {% endif %}
+
+            <!-- New Image Upload -->
+            <div class="form-group">
+                <label for="image">Change Blog Image</label>
+                {{ form.image }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Blog</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+<script>
+  ClassicEditor
+    .create(document.querySelector('#id_description'))
+    .then(editor => {
+        console.log('Editor initialized', editor);
+    })
+    .catch(error => {
+        console.error('Editor initialization error', error);
+    });
+</script>
+{% endblock script %}
